@@ -1,10 +1,10 @@
-import { Delete, Drafts, Inbox } from "@mui/icons-material"
+import { Drafts, Inbox } from "@mui/icons-material"
 import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 
-const NavListDrawer = () => {
+const NavListDrawer = ({navLinks}) => {
   return (
-    <Box sx={{width: 250, bgcolor: "lightsalmon"}}>
-      <nav>
+    <Box sx={{width: 250}}>
+      {/* <nav>
         <List>
           <ListItem>
             <ListItemIcon><Inbox /></ListItemIcon>
@@ -15,20 +15,18 @@ const NavListDrawer = () => {
             <ListItemText primary="Drafts" />
           </ListItem>
         </List>
-      </nav>
-      <Divider />
+      </nav> 
+      <Divider /> */}
       <nav>
         <List>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#trash">
-              <ListItemText>Trash</ListItemText>
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#spam">
-              <ListItemText>Spam</ListItemText>
-            </ListItemButton>
-          </ListItem>
+          {navLinks.map(el => (
+            <ListItem disablePadding key={crypto.randomUUID()}>
+              <ListItemButton component="a" href={el.path}>
+                <ListItemText>{el.title}</ListItemText>
+              </ListItemButton>
+            </ListItem>
+
+          ))}
         </List>
       </nav>
     </Box>
