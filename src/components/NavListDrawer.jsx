@@ -1,7 +1,8 @@
 import { Drafts, Inbox } from "@mui/icons-material"
 import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import { NavLink } from "react-router-dom"
 
-const NavListDrawer = ({navLinks}) => {
+const NavListDrawer = ({navLinks, setOpen}) => {
   return (
     <Box sx={{width: 250}}>
       {/* <nav>
@@ -21,7 +22,7 @@ const NavListDrawer = ({navLinks}) => {
         <List>
           {navLinks.map(el => (
             <ListItem disablePadding key={crypto.randomUUID()}>
-              <ListItemButton component="a" href={el.path}>
+              <ListItemButton component={NavLink} to={el.path} onClick={() => setOpen(false)}>
                 <ListItemText>{el.title}</ListItemText>
               </ListItemButton>
             </ListItem>
