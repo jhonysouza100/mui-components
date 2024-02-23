@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import WeatherApp from "./pages/WeatherApp";
+import Skeleton from "./pages/Skeleton";
 
 
 const navLinks = [
@@ -12,6 +13,7 @@ const navLinks = [
   {title: "Login", path: "/login"},
   {title: "Register", path: "/register"},
   {title: "Weather App", path: "/weather-app"},
+  {title: "Skeleton", path: "/skeleton"},
 ]
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/weather-app" element={<WeatherApp />} />
+          <Route path="/skeleton" element={<Skeleton />} />
         </Routes>
       </Container>
     </>

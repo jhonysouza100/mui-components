@@ -1,5 +1,5 @@
 import { LoadingButton } from "@mui/lab"
-import { Container, Divider, TextField, Typography } from "@mui/material"
+import { Container, TextField, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import { useState } from "react"
 
@@ -11,7 +11,15 @@ const WeatherApp = () => {
     error: false,
     message: "",
   })
-  const apiurl = `http://api.weatherapi.com/v1/current.json?key=${apikey}=${city}&aqi=no`
+  const [weather, setWeather] = useState({
+    city: "",
+    country: "",
+    temp: "",
+    condition: "",
+    icon: "",
+    conditionText: "",
+  })
+  const apiurl = `http://api.weatherapi.com/v1/current.json?key=${apikey}&q=${city}&aqi=no`
   const onSubmit = async (e) => {
     e.preventDefault()
     console.log("Submit", city)
@@ -21,11 +29,21 @@ const WeatherApp = () => {
       message: "",
     })
     try {
+      // si la consulta esta vacia o solo tiene espacios
       if(!city.trim()) throw {message: "Please digit an city"}
       const res = await fetch(apiurl)
       const data = await res.json()
       console.log(data)
-
+      // cuando se consulta una ciudad inexistente
+      if(data.error) throw {message: data.error.message}
+      setWeather({
+        city: data.location.name,
+        country: data.location.country,
+        temp: data.current.temp_c,
+        condition: data.current.condition.code,
+        icon: data.current.condition.icon,
+        conditionText: data.current.condition.text,
+      })
     } catch (err) {
       console.log(err)
       setError({
@@ -64,8 +82,16 @@ const WeatherApp = () => {
             loadingIndicator="Loading..."
           >Get</LoadingButton>
       </Box>
+
+      {weather.city && (
+        <Box sx={{mt: 2, display: "grid", gap: 2, textAlign: "center"}}>
+          <Typography variant="h4" component="h2">{weather.city}, {weather.country}</Typography>
+          <Box component="img" alt={weather.conditionText} src={weather.icon} sx={{margin: "0 auto"}}></Box>
+          <Typography variant="h5" component="h3">{weather.temp} °C</Typography>
+          <Typography variant="h6" component="h4">{weather.conditionText}</Typography>
+        </Box>
+      )}
       
-      <Divider />
       <Typography textAlign="center" sx={{mt: 2, fontSize: "10px"}}>Powered by:{" "}<a href="https://www.weatherapi.com/" title="Weather API"> WatherAPI.com</a></Typography>
     </Container>
   )

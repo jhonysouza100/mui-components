@@ -11,7 +11,7 @@ const NavBar = ({navLinks}) => {
     <AppBar>
       <Toolbar>
         <IconButton sx={{display: {xs: "flex", sm: "none"}}} edge="start" color="inherit" size="large" onClick={() => setOpen(true)}><Menu /></IconButton>
-        <Typography variant="h6" sx={{flexGrow: 1}}>News</Typography>
+        <Typography variant="h6" sx={{flexGrow: 1}}>MUI</Typography>
         <Box sx={{display: {xs: "none", sm: "block"}}}>
           {navLinks.map(el => (<Button component={NavLink} key={crypto.randomUUID()} to={el.path} color="inherit">{el.title}</Button>))}
         </Box>

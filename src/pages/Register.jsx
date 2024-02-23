@@ -31,7 +31,7 @@ const Register = () => {
 
   return (
     <div>
-      <Typography variant="h4" component="h1">Register</Typography>
+      <Typography variant="h4" component="h1" mb={2}>Register</Typography>
       <Box component="form" onSubmit={handleSubmit}>
         <TextField
           id="email"
